@@ -5,21 +5,22 @@
 struct Cliente {
     char* nome;
     char* endereco;
+    int saborPizzaDesejado; // 1 - mussarela; 2 - calabresa
 };
 
-struct Cliente* New_Cliente(char* nome, char* endereco)
+struct Cliente* New_Cliente(char* nome, char* endereco, int saborPizzaDesejado)
 {
    struct Cliente* cliente;
    cliente = malloc(sizeof(struct Cliente));
    cliente->nome = nome;
    cliente->endereco = endereco;
+   cliente->saborPizzaDesejado = saborPizzaDesejado;
    return cliente;
 }
 
-int Del_Cliente(struct Cliente* cliente)
+void Del_Cliente(struct Cliente* cliente)
 {
    free(cliente);
-   return 1;
 }
 
 char* Cliente_GetNome(struct Cliente* cliente)
@@ -27,10 +28,9 @@ char* Cliente_GetNome(struct Cliente* cliente)
    return cliente->nome;
 }
 
-int Cliente_SetNome(struct Cliente* cliente, char* nome)
+void Cliente_SetNome(struct Cliente* cliente, char* nome)
 {
    cliente->nome = nome;
-   return 1;
 }
 
 char* Cliente_GetEndereco(struct Cliente* cliente)
@@ -38,13 +38,22 @@ char* Cliente_GetEndereco(struct Cliente* cliente)
    return cliente->endereco;
 }
 
-int Cliente_SetEndereco(struct Cliente* cliente, char* endereco)
+void Cliente_SetEndereco(struct Cliente* cliente, char* endereco)
 {
    cliente->endereco = endereco;
-   return 1;
 }
 
-void Cliente_FazPedido(struct Cliente* cliente)
-{
-  printf("Cliente %s fez pedido\n", cliente->nome);
+char* Cliente_GetSaborPizzaDesejado(struct Cliente* cliente) {
+    switch(cliente->saborPizzaDesejado) {
+        case 1 : 
+            return "mussarela";
+        case 2 :
+            return "calabresa";
+        default :
+            return "sabor não especificado";
+    }
+}
+
+void Cliente_SetSaborPizzaDesejado(struct Cliente* cliente, int sabor) {
+    cliente->saborPizzaDesejado = sabor;
 }

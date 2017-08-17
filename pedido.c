@@ -1,11 +1,10 @@
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+#include <time.h>
+#include "cliente.h"
 
 struct Pedido {
-    // Pedido tabém precisa me uma Pizza
-    string horaPedido;
-    int prazoDeEntrega; // Em minutos
-    double valorTotal;
+    char* dataHora;
+    struct Cliente* cliente;
 };
 
 struct Pedido* New_Pedido(){
@@ -14,34 +13,26 @@ struct Pedido* New_Pedido(){
     return pedido;
 }
 
-int Del_Pedido(struct Pedido* pedido) {
+void Del_Pedido(struct Pedido* pedido) {
     free(pedido);
-    return 1;
 }
 
-char* Pedido_GetHoraPedido(struct Pedido* pedido) {
-    return pedido->horaPedido;
+char* Pedido_GetDataHora(struct Pedido* pedido) {
+    return pedido->dataHora;
 }
 
-int Pedido_SetHoraPedido(struct Pedido* pedido, char* hora) {
-    pedido->horaPedido = hora;
-    return 1;
+void Pedido_SetDataHora(struct Pedido* pedido, char* dataHora) {
+    pedido->dataHora = dataHora;
 }
 
-int Pedido_GetPrazoDeEntrega(struct Pedido* pedido) {
-    return pedido->prazoDeEntrega;
+struct Cliente* Pedido_GetCliente(struct Pedido* pedido) {
+    return pedido->cliente;
 }
 
-int Pedido_SetPrazoDeEntrega(struct Pedido* pedido, int prazo) {
-    pedido->prazoDeEntrega = prazo;
-    return 1;
+void Pedido_SetCliente(struct Pedido* pedido, struct Cliente* cliente) {
+    pedido->cliente = cliente;
 }
 
-double Pedido_GetValorTotal(struct Pedido* pedido) {
-    return pedido->valorTotal;
-}
 
-int Pedido_SetValorTotal(struct Pedido* pedido, double valor) {
-    pedido->valorTotal = valor;
-    return 1;
-}
+
+
